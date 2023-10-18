@@ -12,7 +12,9 @@ public class DiceCup {
 	{
 		//--------------------
 		// TODO: insert your code here.
-		
+		die1 = -1;
+		die2 = -1;
+		availableMoves = new int[4];
 		//--------------------
 	}
 	/**
