@@ -7,10 +7,10 @@ import java.util.Scanner;
  */
 public class Referee {
 
-	Board myBoard;
-	boolean player1Turn;
-	DiceCup myDiceCup;
-	Scanner keyReader;
+	private Board myBoard;
+	private boolean player1Turn;
+	private DiceCup myDiceCup;
+	private Scanner keyReader;
 	
 	public Referee() {
 		keyReader = new Scanner(System.in);

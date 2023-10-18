@@ -12,7 +12,8 @@ public class Board {
 	// means that there are 3 white pieces trying to move to higher numbered
 	// spaces, and if space (7) contains -2, that means that there are 2 black
 	// pieces trying to move to lower numbered spaces. 
-	
+	private int[] points;
+
 	// Locations 0 and 25 are the bars (penalty zones) for the two teams - if 
 	// the "negative" team is trying to move its pieces to smaller numbers,
 	// then moving them to 0 or less actually removes them from the board - they
@@ -27,6 +28,7 @@ public class Board {
 	{
 		//--------------------
 		// TODO: insert your code here.
+		points = new int[26];
 		
 		//--------------------
 	}

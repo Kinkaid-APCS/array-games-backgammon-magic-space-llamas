@@ -1,6 +1,5 @@
 
 public class BackgammonRunner {
-	//hi
 
 	public static void main(String[] args) 
 	{
