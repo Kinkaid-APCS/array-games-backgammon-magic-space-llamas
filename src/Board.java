@@ -52,31 +52,45 @@ public class Board {
 	public String toString()
 	{
 		String result = "";
-		//--------------------
-		// TODO: insert your code here.
-		
-		//--------------------
+
+		for (int i = 0; i < 26; i++) //points is only 26 long
+		{
+			if (i == 0 || i == 25) {
+				result = result + i + " (BAR) " + piecesToString(points[i]);
+			} else {
+				result = result + i + " " + piecesToString(points[i]);
+			}
+		}
+
+		return result;
+	}
+
+	public String piecesToString(int pieces)
+	{
+		String result = "";
+
+		for (int n = 0; n < Math.abs(pieces); n++) {
+			if (pieces < 0) {
+				result = result + "X";
+			} else {
+				result = result + "O";
+			}
+		}
+
 		return result;
 	}
 	
 	/**
 	 * playerHasPieceAtLocation - determines whether the player has at 
 	 * least one chip at the given space.
-	 * @param whichPlayer - this can be -1 or 1.
+	 * @param playerTurn - who is playing this turn
 	 * @param location - the number of the space in question.
 	 * @return whether (true/false) the player has a chip of his/her own 
 	 * color at this space.
 	 */
-	public boolean playerHasPieceAtLocation(int whichPlayer, int location)
+	public boolean playerHasPieceAtLocation(boolean playerTurn, int location)
 	{
-		boolean hasPiece = false;
-		//--------------------
-		// TODO: insert your code here.
-		// Hint: while you can do this with a couple of if statements, you can also
-		//       do a clever math trick here by multiplying whichPlayer and the number
-		//       of chips at location...
-		//--------------------
-		return hasPiece;
+		return (playerTurn && (points[location] > 0)) || (!(playerTurn) && (points[location] < 0));
 	}
 	
 	/**
@@ -89,13 +103,16 @@ public class Board {
 	 * precondition: yes, there's at least one chip in the space.
 	 * postcondition: the board is unchanged.
 	 */
-	public boolean isLegal(int startingSpace, int numSpaces)
+	public boolean isLegal(boolean playerTurn, int startingSpace, int numSpaces)
 	{
 		boolean legal = false;
-		//--------------------
-		// TODO: insert your code here.
-		
-		//--------------------
+		int location;
+		if (playerTurn) location = startingSpace + numSpaces; else location = startingSpace - numSpaces;
+
+		if (location > 24 || location < 1) {
+			//TODO: continue
+		}
+
 		return legal;
 		
 	}
