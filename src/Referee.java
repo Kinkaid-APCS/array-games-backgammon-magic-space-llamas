@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * The Referee class keeps track of the board, any dice, and all interactions
  * with the players. It keeps track of whose turn it is, displays the board,
@@ -5,21 +7,18 @@
  */
 public class Referee {
 
-	// TODO: decide which private member variables the Referee should have and declare them here.
-	// suggestion: the dice are an array of integers, typically 1-6, where 0 means unrolled or 
-	// used up already.
+	Board myBoard;
+	boolean player1Turn;
+	DiceCup myDiceCup;
+	Scanner keyReader;
 	
-	
-	/**
-	 * constructor - set up the board and players 
-	 */
-	// TODO: you write the Referee's constructor
-	
-	/**
-	 * playGame - the main game loop. Roll the dice, ask the user for a
-	 * move, determine whether it is legal, and then execute the move. 
-	 * Repeat for any remaining dice.
-	 */
+	public Referee() {
+		keyReader = new Scanner(System.in);
+		myBoard = new Board();
+		player1Turn = true;
+		myDiceCup = new DiceCup();
+	}
+
 	public void playGame()
 	{
 		// TODO: you write the Referee's playGame method.
