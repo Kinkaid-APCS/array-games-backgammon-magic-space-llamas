@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  * The dice cup is a class that takes care of rolling two dice, determining whether 
  * doubles were rolled, and keeping track of which moving numbers have been used.
@@ -31,7 +32,15 @@ public class DiceCup {
 	{
 		//--------------------
 		// TODO: insert your code here.
-		
+		if(die1 == die2) {
+			for (int i = 0; i < 4; i++) {
+				availableMoves[i] = die1;
+			}
+		}
+		else {
+			availableMoves[0] = die1;
+			availableMoves[1] = die2;
+		}
 		//--------------------
 	}
 	/**
@@ -44,6 +53,9 @@ public class DiceCup {
 	{
 		//--------------------
 		// TODO: insert your code here.
+		Random rand = new Random();
+		die1 = rand.nextInt(1,7);
+		die2 = rand.nextInt(1, 7);
 		// Hint: (int)(Math.random()*10) gives a random number from 0 to 9, inclusive.
 		// Hint: write calculateAvailableMoves() before you write this one.
 		//--------------------
@@ -71,7 +83,19 @@ public class DiceCup {
 		String result = "";
 		//--------------------
 		// TODO: insert your code here.
-		
+		result += "+-+ +-+\n";
+		result += "|" + die1 + "|" + " " + "|"+ die2 + "|";
+		if (isDoubles()) {
+			result += "doubles";
+		}
+		result += "\n";
+		result += "+-+ +-+\n";
+		result += "Available:";
+		for (int i = 0; i < availableMoves.length; i++) {
+			if (availableMoves[i] != 0) {
+				result += String.valueOf(availableMoves[i]) +" ";
+			}
+		}
 		//--------------------
 		return result;
 		
@@ -99,7 +123,9 @@ public class DiceCup {
 		boolean doubles = false;
 		//--------------------
 		// TODO: insert your code here.
-		
+		if (die1 == die2) {
+			doubles = true;
+		}
 		//--------------------
 		return doubles;
 	}
