@@ -4,6 +4,7 @@ public class BackgammonRunner {
 	public static void main(String[] args) 
 	{
 		boolean testingMode = true;
+		Board board = new Board();
 		DiceCup dicecup = new DiceCup();
 		if (testingMode)
 		{
@@ -13,6 +14,7 @@ public class BackgammonRunner {
 			dicecup.calculateAvailableMoves();
 			System.out.println(dicecup.toString());
 			System.out.println(dicecup.hasMovesLeft());
+			System.out.println(board.toString());
 			System.out.println("End tests");
 		}
 		else

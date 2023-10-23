@@ -29,6 +29,14 @@ public class Board {
 		//--------------------
 		// TODO: insert your code here.
 		points = new int[26];
+		points[1] = 2;
+		points[6] = -5;
+		points[8] = -3;
+		points[12] = 5;
+		points[13] = -5;
+		points[17] = 3;
+		points[19] = 5;
+		points[24] = -2;
 		
 		//--------------------
 	}
@@ -57,12 +65,19 @@ public class Board {
 		{
 			if (i == 0 || i == 25) {
 				result = result + i + " (BAR) " + piecesToString(points[i]);
-			} else {
-				result = result + i + " " + piecesToString(points[i]);
-			}
-		}
+            } else {
+				if (i >= 10) {
+					result = result + i + " " + piecesToString(points[i]);
+				}
+				else {
+					result = result + i + "  " + piecesToString(points[i]);
+				}
+            }
+            result += "\n";
+        }
 
 		return result;
+
 	}
 
 	public String piecesToString(int pieces)
@@ -130,6 +145,9 @@ public class Board {
 	{
 		//--------------------
 		// TODO: insert your code here.
+		if (points[startingSpace] != 0) {
+
+		}
 		
 		//--------------------
 	}
@@ -143,8 +161,25 @@ public class Board {
 	public boolean gameIsOver()
 	{
 		boolean gameOver = false;
+		boolean player1GameOver = true;
+		boolean player2GameOver = true;
 		//--------------------
 		// TODO: Insert your code here
+		for (int i = 0; i < points.length; i++) {
+			if (points[i] > 0) {
+				player1GameOver = false;
+				break;
+			}
+		}
+		for (int i = 0; i < points.length; i++) {
+			if (points[i] < 0) {
+				player2GameOver = false;
+				break;
+			}
+		}
+		if (player1GameOver || player2GameOver) {
+			gameOver = true;
+		}
 		
 		//--------------------
 		return gameOver;
