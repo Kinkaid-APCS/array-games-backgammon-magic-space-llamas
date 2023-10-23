@@ -12,6 +12,7 @@ public class BackgammonRunner {
 			dicecup.roll();
 			dicecup.calculateAvailableMoves();
 			System.out.println(dicecup.toString());
+			System.out.println(dicecup.hasMovesLeft());
 			System.out.println("End tests");
 		}
 		else

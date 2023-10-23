@@ -90,12 +90,13 @@ public class DiceCup {
 		}
 		result += "\n";
 		result += "+-+ +-+\n";
-		result += "Available:";
+		result += "Available: ";
 		for (int i = 0; i < availableMoves.length; i++) {
 			if (availableMoves[i] != 0) {
-				result += String.valueOf(availableMoves[i]) +" ";
+				result += String.valueOf(availableMoves[i]) +", ";
 			}
 		}
+		result = result.substring(0, result.length() - 2);
 		//--------------------
 		return result;
 		
@@ -110,7 +111,11 @@ public class DiceCup {
 		boolean legal = false;
 		//--------------------
 		// TODO: insert your code here.
-		
+		for (int i = 0; i < availableMoves.length; i++) {
+			if (availableMoves[i] == amountToMove) {
+				legal = true;
+			}
+		}
 		//--------------------
 		return legal;
 	}
@@ -140,7 +145,14 @@ public class DiceCup {
 	{
 		//--------------------
 		// TODO: insert your code here.
-		
+		if (isLegal(amountToMove)) {
+			for (int i = 0; i < availableMoves.length; i++) {
+				if (availableMoves[i] == amountToMove) {
+					availableMoves[i] = 0;
+					break;
+				}
+			}
+		}
 		//--------------------
 	
 	}
@@ -152,10 +164,14 @@ public class DiceCup {
 	 */
 	public boolean hasMovesLeft()
 	{
-		boolean hasMoves = true;
+		boolean hasMoves = false;
 		//--------------------
 		// TODO: insert your code here.
-		
+		for (int i = 0; i < availableMoves.length; i++) {
+			if (availableMoves[i] > 0) {
+				hasMoves = true;
+			}
+		}
 		//--------------------
 		return hasMoves;
 	}
