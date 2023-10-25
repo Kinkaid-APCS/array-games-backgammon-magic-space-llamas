@@ -121,8 +121,8 @@ public class Board {
 	public boolean isLegal(boolean playerTurn, int location)
 	{
 		boolean legal = false;
-		if ((location > 24) || (location < 1)) {
-			if (playerHasPieceAtLocation(playerTurn, location) || (playerHasPieceAtLocation(!playerTurn, location) && Math.abs(points[location]) <= 1))  {
+		if ((location <= 24) && (location >= 1)) {
+			if ((playerHasPieceAtLocation(playerTurn, location)) || (playerHasPieceAtLocation(!playerTurn, location) && Math.abs(points[location]) <= 1) || (points[location] == 0))  {
 				legal = true;
 			}
 		}
@@ -151,6 +151,7 @@ public class Board {
 					if (playerTurn) points[25] += 1; else points[0] += 1;
 				}
 				if (playerTurn) points[location] += 1; else points[location] -= 1;
+				if (playerTurn) points[startingSpace] -= 1; else points[startingSpace] += 1;
 			}
 		}
 	}

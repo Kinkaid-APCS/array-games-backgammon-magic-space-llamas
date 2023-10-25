@@ -109,8 +109,6 @@ public class DiceCup {
 	public boolean isLegal(int amountToMove)
 	{
 		boolean legal = false;
-		//--------------------
-		// TODO: insert your code here.
 		for (int i = 0; i < availableMoves.length; i++) {
 			if (availableMoves[i] == amountToMove) {
 				legal = true;
