@@ -166,8 +166,6 @@ public class Board {
 		boolean gameOver = false;
 		boolean player1GameOver = true;
 		boolean player2GameOver = true;
-		//--------------------
-		// TODO: Insert your code here
 		for (int i = 0; i < points.length; i++) {
 			if (points[i] > 0) {
 				player1GameOver = false;
@@ -183,8 +181,7 @@ public class Board {
 		if (player1GameOver || player2GameOver) {
 			gameOver = true;
 		}
-		
-		//--------------------
+
 		return gameOver;
 	}
 }
