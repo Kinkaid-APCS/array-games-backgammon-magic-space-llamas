@@ -3,7 +3,7 @@ public class BackgammonRunner {
 
 	public static void main(String[] args) 
 	{
-		boolean testingMode = true;
+		boolean testingMode = false;
 		Board board = new Board();
 		DiceCup dicecup = new DiceCup();
 		if (testingMode)

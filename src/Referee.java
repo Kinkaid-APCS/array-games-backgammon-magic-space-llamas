@@ -27,6 +27,7 @@ public class Referee {
 		System.out.println("Playing game."); // placeholder code.
         player1Turn = !player1Turn;
 		myDiceCup.roll();
+		myDiceCup.calculateAvailableMoves();
 		System.out.println(myDiceCup.toString());
 		//code for if player is bearing off :
 

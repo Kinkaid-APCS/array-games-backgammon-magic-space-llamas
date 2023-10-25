@@ -86,7 +86,7 @@ public class DiceCup {
 		result += "+-+ +-+\n";
 		result += "|" + die1 + "|" + " " + "|"+ die2 + "|";
 		if (isDoubles()) {
-			result += "doubles";
+			result += "\tdoubles";
 		}
 		result += "\n";
 		result += "+-+ +-+\n";
