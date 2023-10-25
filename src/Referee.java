@@ -23,29 +23,31 @@ public class Referee {
 
 	public void playGame()
 	{
-        player1Turn = !player1Turn; //switches player turn
+        while (!myBoard.gameIsOver()) {
+			player1Turn = !player1Turn; //switches player turn
+			if (player1Turn) System.out.println("Player 1 Turn:"); else System.out.println("Player 2 Turn:");
 
-		myDiceCup.roll();
-		myDiceCup.calculateAvailableMoves();
+			myDiceCup.roll();
+			myDiceCup.calculateAvailableMoves();
 
-		//code for if player is bearing off :
+			//code for if player is bearing off :
 
 
-		//if not bearing off:
-		//check for bar pieces
-		if (player1Turn) {
-			bar = 0;
-		}
-		else {
-			bar = 25;
-		}
-//		if (myBoard.playerHasPieceAtLocation(player1Turn, bar)) {
-//		}
+			//if not bearing off:
+			//check for bar pieces
+			if (player1Turn) {
+				bar = 0;
+			} else {
+				bar = 25;
+			}
+	//		if (myBoard.playerHasPieceAtLocation(player1Turn, bar)) {
+	//		}
 
-		while (myDiceCup.hasMovesLeft()) {
-			System.out.println(myBoard);
-			System.out.println(myDiceCup.toString());
-			playerMove();
+			while (myDiceCup.hasMovesLeft()) {
+				System.out.println(myBoard);
+				System.out.println(myDiceCup.toString());
+				playerMove();
+			}
 		}
 	}
 
