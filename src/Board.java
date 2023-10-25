@@ -118,14 +118,13 @@ public class Board {
 	 * precondition: yes, there's at least one chip in the space.
 	 * postcondition: the board is unchanged.
 	 */
-	public boolean isLegal(boolean playerTurn, int startingSpace, int numSpaces)
+	public boolean isLegal(boolean playerTurn, int location)
 	{
 		boolean legal = false;
-		int location;
-		if (playerTurn) location = startingSpace + numSpaces; else location = startingSpace - numSpaces;
-
-		if (location > 24 || location < 1) {
-			//TODO: continue
+		if ((location > 24) || (location < 1)) {
+			if (playerHasPieceAtLocation(playerTurn, location) || (playerHasPieceAtLocation(!playerTurn, location) && Math.abs(points[location]) <= 1))  {
+				legal = true;
+			}
 		}
 
 		return legal;
@@ -141,15 +140,19 @@ public class Board {
 	 * postcondition: the chip may be moved to a different space, or off the board.
 	 * If the chip lands on a single enemy piece, that piece is sent to its bar.
 	 */
-	public void makeMove(int startingSpace, int numSpacesToMove)
+	public void makeMove(boolean playerTurn, int startingSpace, int numSpaces)
 	{
-		//--------------------
-		// TODO: insert your code here.
 		if (points[startingSpace] != 0) {
+			int location;
+			if (playerTurn) location = startingSpace + numSpaces; else location = startingSpace - numSpaces;
 
+			if (isLegal(playerTurn, location)) {
+				if (playerHasPieceAtLocation(!playerTurn, location)) {
+					if (playerTurn) points[25] += 1; else points[0] += 1;
+				}
+				if (playerTurn) points[location] += 1; else points[location] -= 1;
+			}
 		}
-		
-		//--------------------
 	}
 	
 	
@@ -163,8 +166,6 @@ public class Board {
 		boolean gameOver = false;
 		boolean player1GameOver = true;
 		boolean player2GameOver = true;
-		//--------------------
-		// TODO: Insert your code here
 		for (int i = 0; i < points.length; i++) {
 			if (points[i] > 0) {
 				player1GameOver = false;
@@ -180,8 +181,7 @@ public class Board {
 		if (player1GameOver || player2GameOver) {
 			gameOver = true;
 		}
-		
-		//--------------------
+
 		return gameOver;
 	}
 }
