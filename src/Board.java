@@ -130,6 +130,10 @@ public class Board {
 		return legal;
 		
 	}
+
+	public int[] getPoints() {
+		return points;
+	}
 	
 	/**
 	 * makeMove - moves one chip from the given space by the specified amount;

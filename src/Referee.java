@@ -29,7 +29,10 @@ public class Referee {
 
 			myDiceCup.roll();
 			myDiceCup.calculateAvailableMoves();
-
+			if (!canMakeMove()) {
+				System.out.println("You cannot make any possible moves. Your turn has ended. ");
+				continue;
+			}
 			//code for if player is bearing off :
 
 
@@ -40,8 +43,7 @@ public class Referee {
 			} else {
 				bar = 25;
 			}
-	//		if (myBoard.playerHasPieceAtLocation(player1Turn, bar)) {
-	//		}
+
 
 			while (myDiceCup.hasMovesLeft()) {
 				System.out.println(myBoard);
@@ -49,6 +51,40 @@ public class Referee {
 				playerMove();
 			}
 		}
+	}
+
+	public boolean canMakeMove() {
+		int[] availableMoves = myDiceCup.getAvailableMoves();
+		int[] board = myBoard.getPoints();
+		if (myBoard.playerHasPieceAtLocation(player1Turn, bar)) {
+			for (int j = 0; j < availableMoves.length; j++) {
+				if (player1Turn) {
+					if (myBoard.isLegal(player1Turn, 0 + availableMoves[j])) {
+						return true;
+					}
+				} else {
+					if (myBoard.isLegal(player1Turn, 25 - availableMoves[j])) {
+						return true;
+					}
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < board.length; i++) {
+				for (int j = 0; j < availableMoves.length; j++) {
+					if (player1Turn) {
+						if (myBoard.isLegal(player1Turn, i + availableMoves[j])) {
+							return true;
+						}
+					} else {
+						if (myBoard.isLegal(player1Turn, i - availableMoves[j])) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public void playerMove() {
@@ -59,24 +95,35 @@ public class Referee {
 
 	public int[] getPlayerMove() {
 		int numSpaces = -1;
-		while (!myDiceCup.isLegal(numSpaces)) {
+		if (myBoard.playerHasPieceAtLocation(player1Turn, bar)) {
+			System.out.println("You need to make a bar move.");
+		}
+		while (!myDiceCup.isLegal(numSpaces) || numSpaces == 0) {
 			System.out.println("Input number of spaces to move (from available moves): ");
 			numSpaces = keyReader.nextInt();
 		}
 
-		System.out.println("Input starting location of piece to move: ");
-		int startingLocation = keyReader.nextInt();
-		int dest;
-		if (player1Turn) dest = startingLocation + numSpaces; else dest = startingLocation - numSpaces;
+		if (myBoard.playerHasPieceAtLocation(player1Turn, bar)) {
+			return new int[]{numSpaces, bar};
+		}
 
-		while (!myBoard.isLegal(player1Turn, dest) || !myBoard.playerHasPieceAtLocation(player1Turn, startingLocation)) {
+		else {
 			System.out.println("Input starting location of piece to move: ");
-			startingLocation = keyReader.nextInt();
+			int startingLocation = keyReader.nextInt();
+			int dest;
+			if (player1Turn) dest = startingLocation + numSpaces;
+			else dest = startingLocation - numSpaces;
 
-			if (player1Turn) dest = startingLocation + numSpaces; else dest = startingLocation - numSpaces;
-		} //TODO: come back to this
+			while (!myBoard.isLegal(player1Turn, dest) || !myBoard.playerHasPieceAtLocation(player1Turn, startingLocation)) {
+				System.out.println("Input starting location of piece to move: ");
+				startingLocation = keyReader.nextInt();
 
-		return new int[]{numSpaces, startingLocation};
+				if (player1Turn) dest = startingLocation + numSpaces;
+				else dest = startingLocation - numSpaces;
+			} //TODO: come back to this
+
+			return new int[]{numSpaces, startingLocation};
+		}
 	}
 	public void playerBear() {
 

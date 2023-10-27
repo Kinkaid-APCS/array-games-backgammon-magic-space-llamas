@@ -193,7 +193,7 @@ public class DiceCup {
 		return dice;
 	}
 	
-	public int[] debugGetAvailableMoves()
+	public int[] getAvailableMoves()
 	{
 		return availableMoves;
 	}
