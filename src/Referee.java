@@ -33,10 +33,6 @@ public class Referee {
 				System.out.println("You cannot make any possible moves. Your turn has ended. ");
 				continue;
 			}
-			//code for if player is bearing off :
-
-
-			//if not bearing off:
 			//check for bar pieces
 			if (player1Turn) {
 				bar = 0;
@@ -120,14 +116,12 @@ public class Referee {
 
 				if (player1Turn) dest = startingLocation + numSpaces;
 				else dest = startingLocation - numSpaces;
-			} //TODO: come back to this
+			}
 
 			return new int[]{numSpaces, startingLocation};
 		}
 	}
-	public void playerBear() {
 
-	}
 
 	//TODO:
 	public boolean checkWinner() {

@@ -29,15 +29,29 @@ public class Board {
 		//--------------------
 		// TODO: insert your code here.
 		points = new int[26];
-		points[1] = 2;
-		points[6] = -5;
-		points[8] = -3;
-		points[12] = 5;
-		points[13] = -5;
-		points[17] = 3;
-		points[19] = 5;
-		points[24] = -2;
-		
+//		points[1] = 2;
+//		points[6] = -5;
+//		points[8] = -3;
+//		points[12] = 5;
+//		points[13] = -5;
+//		points[17] = 3;
+//		points[19] = 5;
+//		points[24] = -2;
+//
+
+		points[1] = -3;
+		points[2] = -3;
+		points[3] = -3;
+		points[4] = -3;
+		points[5] = -2;
+		points[6] = -1;
+
+		points[19] = 3;
+		points[20] = 3;
+		points[21] = 3;
+		points[22] = 3;
+		points[23] = 2;
+		points[24] = 1;
 		//--------------------
 	}
 	
@@ -121,7 +135,7 @@ public class Board {
 	public boolean isLegal(boolean playerTurn, int location)
 	{
 		boolean legal = false;
-		if ((location <= 24) && (location >= 1)) {
+		if (((location <= 24) && (location >= 1)) || (canBearOff(playerTurn) && (location == 25 || location == 0))) {
 			if ((playerHasPieceAtLocation(playerTurn, location)) || (playerHasPieceAtLocation(!playerTurn, location) && Math.abs(points[location]) <= 1) || (points[location] == 0))  {
 				legal = true;
 			}
@@ -129,6 +143,24 @@ public class Board {
 
 		return legal;
 		
+	}
+
+	public boolean canBearOff(boolean player1Turn) {
+		if (player1Turn) {
+			for (int i = 0; i <= 18; i++) {
+				if (points[i] > 0) {
+					return false;
+				}
+			}
+		}
+		else {
+			for (int i = 25; i >= 7; i--) {
+				if (points[i] < 0) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	public int[] getPoints() {
@@ -150,7 +182,15 @@ public class Board {
 			int location;
 			if (playerTurn) location = startingSpace + numSpaces; else location = startingSpace - numSpaces;
 
-			if (isLegal(playerTurn, location)) {
+			if (canBearOff(playerTurn) && (location == 25 || location == 0)) {
+				if (playerTurn) {
+					points[startingSpace] -= 1;
+				}
+				else {
+					points[startingSpace] += 1;
+				}
+			}
+			else if (isLegal(playerTurn, location)) {
 				if (playerHasPieceAtLocation(!playerTurn, location)) {
 					if (playerTurn) points[25] += 1; else points[0] += 1;
 					points[location] = 0;
