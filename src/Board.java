@@ -149,6 +149,7 @@ public class Board {
 			if (isLegal(playerTurn, location)) {
 				if (playerHasPieceAtLocation(!playerTurn, location)) {
 					if (playerTurn) points[25] += 1; else points[0] += 1;
+					points[location] = 0;
 				}
 				if (playerTurn) points[location] += 1; else points[location] -= 1;
 				if (playerTurn) points[startingSpace] -= 1; else points[startingSpace] += 1;
