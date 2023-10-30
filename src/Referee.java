@@ -30,13 +30,13 @@ public class Referee {
 			myDiceCup.roll();
 			myDiceCup.calculateAvailableMoves();
 
-			while (!canMakeMove() && myBoard.canBearOff(player1Turn) && myDiceCup.hasMovesLeft()) {
-				System.out.println(myBoard);
-				System.out.println(myDiceCup.toString());
-				System.out.println("You are forced to bear off.");
-				myBoard.forceBear(player1Turn);
-				myDiceCup.delAvailableMove();
-			}
+//			while (!canMakeMove() && myBoard.canBearOff(player1Turn) && myDiceCup.hasMovesLeft()) {
+//				System.out.println(myBoard);
+//				System.out.println(myDiceCup.toString());
+//				System.out.println("You are forced to bear off.");
+//				myBoard.forceBear(player1Turn);
+//				myDiceCup.delAvailableMove();
+//			}
 
 			if (!canMakeMove()) {
 				System.out.println("You cannot make any possible moves. Your turn has ended. ");
@@ -54,8 +54,17 @@ public class Referee {
 			while (myDiceCup.hasMovesLeft()) {
 				System.out.println(myBoard);
 				System.out.println(myDiceCup.toString());
+				while (!canMakeMove() && myBoard.canBearOff(player1Turn) && myDiceCup.hasMovesLeft()) {
+					System.out.println("You are forced to bear off.");
+					myBoard.forceBear(player1Turn);
+					myDiceCup.delAvailableMove();
+				}
 				playerMove();
 			}
+		}
+
+		if (myBoard.gameIsOver()) {
+			if (player1Turn) System.out.println("Player 1 wins!"); else System.out.println("Player 2 wins!");
 		}
 	}
 
@@ -137,14 +146,4 @@ public class Referee {
 			return new int[]{numSpaces, startingLocation};
 		}
 	}
-
-
-	//TODO:
-	public boolean checkWinner() {
-        if (myBoard.gameIsOver()) {
-			//check who wins
-			return true;
-		}
-        return false;
-    }
 }

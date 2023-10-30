@@ -51,7 +51,7 @@ public class Board {
 		points[21] = 0;
 		points[22] = 0;
 		points[23] = 0;
-		points[24] = 15;
+		points[24] = 5;
 		//--------------------
 	}
 	
