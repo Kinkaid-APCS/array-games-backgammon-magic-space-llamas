@@ -141,8 +141,6 @@ public class DiceCup {
 	 */
 	public void moveMade(int amountToMove)
 	{
-		//--------------------
-		// TODO: insert your code here.
 		if (isLegal(amountToMove)) {
 			for (int i = 0; i < availableMoves.length; i++) {
 				if (availableMoves[i] == amountToMove) {
@@ -151,8 +149,15 @@ public class DiceCup {
 				}
 			}
 		}
-		//--------------------
-	
+	}
+
+	public void delAvailableMove() {
+		for (int i = 0; i < availableMoves.length; i++) {
+			if (availableMoves[i] > 0) {
+				availableMoves[i] = 0;
+				break;
+			}
+		}
 	}
 	
 	/**

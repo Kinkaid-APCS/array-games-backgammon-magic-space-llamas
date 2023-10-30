@@ -29,10 +29,20 @@ public class Referee {
 
 			myDiceCup.roll();
 			myDiceCup.calculateAvailableMoves();
+
+			while (!canMakeMove() && myBoard.canBearOff(player1Turn) && myDiceCup.hasMovesLeft()) {
+				System.out.println(myBoard);
+				System.out.println(myDiceCup.toString());
+				System.out.println("You are forced to bear off.");
+				myBoard.forceBear(player1Turn);
+				myDiceCup.delAvailableMove();
+			}
+
 			if (!canMakeMove()) {
 				System.out.println("You cannot make any possible moves. Your turn has ended. ");
 				continue;
 			}
+
 			//check for bar pieces
 			if (player1Turn) {
 				bar = 0;
@@ -54,27 +64,33 @@ public class Referee {
 		int[] board = myBoard.getPoints();
 		if (myBoard.playerHasPieceAtLocation(player1Turn, bar)) {
 			for (int j = 0; j < availableMoves.length; j++) {
-				if (player1Turn) {
-					if (myBoard.isLegal(player1Turn, 0 + availableMoves[j])) {
-						return true;
-					}
-				} else {
-					if (myBoard.isLegal(player1Turn, 25 - availableMoves[j])) {
-						return true;
+				if (!(availableMoves[j] == 0)) {
+					if (player1Turn) {
+						if (myBoard.isLegal(player1Turn, 0 + availableMoves[j])) {
+							return true;
+						}
+					} else {
+						if (myBoard.isLegal(player1Turn, 25 - availableMoves[j])) {
+							return true;
+						}
 					}
 				}
 			}
 		}
 		else {
 			for (int i = 0; i < board.length; i++) {
-				for (int j = 0; j < availableMoves.length; j++) {
-					if (player1Turn) {
-						if (myBoard.isLegal(player1Turn, i + availableMoves[j])) {
-							return true;
-						}
-					} else {
-						if (myBoard.isLegal(player1Turn, i - availableMoves[j])) {
-							return true;
+				if (myBoard.playerHasPieceAtLocation(player1Turn, i)) {
+					for (int j = 0; j < availableMoves.length; j++) {
+						if (!(availableMoves[j] == 0)) {
+							if (player1Turn) {
+								if (myBoard.isLegal(player1Turn, i + availableMoves[j])) {
+									return true;
+								}
+							} else {
+								if (myBoard.isLegal(player1Turn, i - availableMoves[j])) {
+									return true;
+								}
+							}
 						}
 					}
 				}

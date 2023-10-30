@@ -46,12 +46,12 @@ public class Board {
 		points[5] = -2;
 		points[6] = -1;
 
-		points[19] = 3;
-		points[20] = 3;
-		points[21] = 3;
-		points[22] = 3;
-		points[23] = 2;
-		points[24] = 1;
+		points[19] = 0;
+		points[20] = 0;
+		points[21] = 0;
+		points[22] = 0;
+		points[23] = 0;
+		points[24] = 15;
 		//--------------------
 	}
 	
@@ -197,6 +197,25 @@ public class Board {
 				}
 				if (playerTurn) points[location] += 1; else points[location] -= 1;
 				if (playerTurn) points[startingSpace] -= 1; else points[startingSpace] += 1;
+			}
+		}
+	}
+
+	public void forceBear(boolean playerTurn) {
+		if (playerTurn) {
+			for (int p = 19; p < 25; p++) {
+				if (playerHasPieceAtLocation(playerTurn, p)) {
+					points[p] -= 1;
+					break;
+				}
+			}
+		}
+		else {
+			for (int p = 6; p > 0; p--) {
+				if (playerHasPieceAtLocation(playerTurn, p)) {
+					points[p] += 1;
+					break;
+				}
 			}
 		}
 	}
