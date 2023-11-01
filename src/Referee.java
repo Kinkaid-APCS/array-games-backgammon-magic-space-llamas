@@ -30,15 +30,15 @@ public class Referee {
 			myDiceCup.roll();
 			myDiceCup.calculateAvailableMoves();
 
-//			while (!canMakeMove() && myBoard.canBearOff(player1Turn) && myDiceCup.hasMovesLeft()) {
-//				System.out.println(myBoard);
-//				System.out.println(myDiceCup.toString());
-//				System.out.println("You are forced to bear off.");
-//				myBoard.forceBear(player1Turn);
-//				myDiceCup.delAvailableMove();
-//			}
+			while (!canMakeMove() && myBoard.canBearOff(player1Turn) && myDiceCup.hasMovesLeft()) {
+				System.out.println(myBoard);
+				System.out.println(myDiceCup.toString());
+				System.out.println("You are forced to bear off.");
+				myBoard.forceBear(player1Turn);
+				myDiceCup.delAvailableMove();
+			}
 
-			if (!canMakeMove()) {
+			if (!canMakeMove() && !myBoard.gameIsOver()) {
 				System.out.println("You cannot make any possible moves. Your turn has ended. ");
 				continue;
 			}
@@ -59,7 +59,9 @@ public class Referee {
 					myBoard.forceBear(player1Turn);
 					myDiceCup.delAvailableMove();
 				}
-				playerMove();
+				if (myDiceCup.hasMovesLeft()) {
+					playerMove();
+				}
 			}
 		}
 
