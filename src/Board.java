@@ -29,29 +29,29 @@ public class Board {
 		//--------------------
 		// TODO: insert your code here.
 		points = new int[26];
-//		points[1] = 2;
-//		points[6] = -5;
-//		points[8] = -3;
-//		points[12] = 5;
-//		points[13] = -5;
-//		points[17] = 3;
-//		points[19] = 5;
-//		points[24] = -2;
+		points[1] = 2;
+		points[6] = -5;
+		points[8] = -3;
+		points[12] = 5;
+		points[13] = -5;
+		points[17] = 3;
+		points[19] = 5;
+		points[24] = -2;
 //
-
-		points[1] = -3;
-		points[2] = -3;
-		points[3] = -3;
-		points[4] = -3;
-		points[5] = -2;
-		points[6] = -1;
-
-		points[19] = 0;
-		points[20] = 0;
-		points[21] = 0;
-		points[22] = 0;
-		points[23] = 0;
-		points[24] = 5;
+//
+//		points[1] = -3;
+//		points[2] = -3;
+//		points[3] = -3;
+//		points[4] = -3;
+//		points[5] = -2;
+//		points[6] = -1;
+//
+//		points[19] = 0;
+//		points[20] = 0;
+//		points[21] = 0;
+//		points[22] = 0;
+//		points[23] = 0;
+//		points[24] = 5;
 		//--------------------
 	}
 	
@@ -75,20 +75,70 @@ public class Board {
 	{
 		String result = "";
 
-		for (int i = 0; i < 26; i++) //points is only 26 long
-		{
-			if (i == 0 || i == 25) {
-				result = result + i + " (BAR) " + piecesToString(points[i]);
-            } else {
-				if (i >= 10) {
-					result = result + i + " " + piecesToString(points[i]);
+		for (int i = 0; i < 19; i++) {
+			result += "\n";
+			switch (i) {
+				case 0 -> result += "  1 1 1 1 1 1   1 2 2 2 2 2  ";
+				case 1 -> result += "  3 4 5 6 7 8   9 0 1 2 3 4  ";
+				case 17 -> result += "  1 1 1                      ";
+				case 18 -> result += "  2 1 0 9 8 7   6 5 4 3 2 1  ";
+			}
+			for (int j = 0; j < 15; j++) {
+				switch (i) {
+					case 2 -> result += "__";
+					case 16 -> result += "‾‾";
+					case 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 -> {
+						if (i >= 3 && i < 9 && j >= 1 && j < 7 && Math.abs(points[j - 1 + 13]) > i - 3) {
+							if (points[j - 1 + 13] > 0) result += "O ";
+							else result += "X ";
+						}
+						else if (i >= 3 && i < 9 && j >= 8 && j < 14 && Math.abs(points[j - 8 + 19]) > i - 3) {
+							if (points[j - 8 + 19] > 0) result += "O ";
+							else result += "X ";
+						}
+						else if (i >= 10 && i < 16 && j >= 8 && j < 14 && Math.abs(points[6 - (j - 8)]) > i - 10) {
+							if (points[6 - (j - 8)] > 0) result += "O ";
+							else result += "X ";
+						}
+						else if (i >= 10 && i < 16 && j >= 1 && j < 7 && Math.abs(points[12 - (j - 1)]) > i - 10) {
+							if (points[12 - (j - 1)] > 0) result += "O ";
+							else result += "X ";
+						}
+						else if (j == 0 ) {
+							result += "| ";
+						}
+						else if (j == 14) {
+							result += " |";
+						}
+						else if (j == 7) {
+							result += "| ";
+						}
+						else if (i == 9) {
+							result += "--";
+						}
+						else {
+							result += "  ";
+						}
+					}
 				}
-				else {
-					result = result + i + "  " + piecesToString(points[i]);
-				}
-            }
-            result += "\n";
-        }
+			}
+		}
+
+//
+//		for (int i = 0; i < 26; i++) //points is only 26 long
+//		{
+//			if (i == 0 || i == 25) {
+//				result = result + i + " (BAR) " + piecesToString(points[i]);
+//            } else {
+//				if (i >= 10) {
+//					result = result + i + " " + piecesToString(points[i]);
+//				}
+//				else {
+//					result = result + i + "  " + piecesToString(points[i]);
+//				}
+//            }
+//            result += "\n";
+//        }
 
 		return result;
 
