@@ -25,7 +25,7 @@ public class Referee {
 	{
         while (!myBoard.gameIsOver()) {
 			player1Turn = !player1Turn; //switches player turn
-			if (player1Turn) System.out.println("Player 1 Turn:"); else System.out.println("Player 2 Turn:");
+			if (player1Turn) System.out.println("Player 1 (O) Turn:"); else System.out.println("Player 2 (X) Turn:");
 
 			myDiceCup.roll();
 			myDiceCup.calculateAvailableMoves();

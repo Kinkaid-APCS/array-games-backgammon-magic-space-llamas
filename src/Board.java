@@ -29,14 +29,19 @@ public class Board {
 		//--------------------
 		// TODO: insert your code here.
 		points = new int[26];
-		points[1] = 2;
+//		points[1] = 2;
 		points[6] = -5;
 		points[8] = -3;
-		points[12] = 5;
+//		points[12] = 5;
 		points[13] = -5;
-		points[17] = 3;
-		points[19] = 5;
+//		points[17] = 3;
+//		points[19] = 5;
 		points[24] = -2;
+
+		points[12] = -103;
+		points[19] = 55;
+		points[17] = 64;
+		points[1] = 15;
 //
 //
 //		points[1] = -3;
@@ -88,20 +93,36 @@ public class Board {
 					case 2 -> result += "__";
 					case 16 -> result += "‾‾";
 					case 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 -> {
-						if (i >= 3 && i < 9 && j >= 1 && j < 7 && Math.abs(points[j - 1 + 13]) > i - 3) {
-							if (points[j - 1 + 13] > 0) result += "O ";
+						if (i >= 3 && i < 9 && j >= 1 && j < 7 && Math.abs(points[j - 1 + 13]) > i - 3) { // yes some conditions below are redundant such as i >= 3 but help to illustrate which quadrant we're working in
+							int tP = Math.abs(points[j - 1 + 13]);
+							if (i == 3 && tP > 6 && tP < 15) result += tP - 5 + " ";
+							else if (i == 4 && tP > 14 && tP < 104) result += tP % 10 + " ";
+							else if (i == 3 && tP > 14 && tP < 104) result += ((int) Math.floor((tP - 4) / 10)) + " ";
+							else if (tP > 0) result += "O ";
 							else result += "X ";
 						}
 						else if (i >= 3 && i < 9 && j >= 8 && j < 14 && Math.abs(points[j - 8 + 19]) > i - 3) {
-							if (points[j - 8 + 19] > 0) result += "O ";
+							int tP = Math.abs(points[j - 8 + 19]);
+							if (i == 3 && tP > 6 && points[j - 8 + 19] < 15) result += Math.abs((points[j - 8 + 19] - 5)) + " ";
+							else if (i == 4 && points[j - 8 + 19] > 14 && points[j - 8 + 19] < 104) result += (Math.abs(points[j - 8 + 19] - 4) % 10) + " ";
+							else if (i == 3 && points[j - 8 + 19] > 14 && points[j - 8 + 19] < 104) result += ((int) Math.floor(Math.abs(points[j - 8 + 19] - 4) / 10)) + " ";
+							else if (points[j - 8 + 19] > 0) result += "O ";
 							else result += "X ";
 						}
-						else if (i >= 10 && i < 16 && j >= 8 && j < 14 && Math.abs(points[6 - (j - 8)]) > i - 10) {
-							if (points[6 - (j - 8)] > 0) result += "O ";
+						else if (i >= 10 && i < 16 && j >= 8 && j < 14 && Math.abs(points[6 - (j - 8)]) > (5 - i) + 10) {
+							int tP = Math.abs(points[6 - (j - 8)]); //thisPoint
+							if (i == 15 && tP > 6 && tP < 15) result += (tP - 5) + " ";
+							else if (i == 15 && tP > 14 && tP < 104) result += ((tP - 4) % 10) + " ";
+							else if (i == 14 && tP > 14 && tP < 104) result += ((int) (Math.floor((tP - 4) / 10))) + " ";
+							else if (points[6 - (j - 8)] > 0) result += "O ";
 							else result += "X ";
 						}
-						else if (i >= 10 && i < 16 && j >= 1 && j < 7 && Math.abs(points[12 - (j - 1)]) > i - 10) {
-							if (points[12 - (j - 1)] > 0) result += "O ";
+						else if (i >= 10 && i < 16 && j >= 1 && j < 7 && Math.abs(points[12 - (j - 1)]) > (5 - i) + 10) {
+							int tP = Math.abs(points[12 - (j - 1)]);
+							if (i == 15 && tP > 6 && tP < 15) result += (tP - 5) + " ";
+							else if (i == 15 && tP > 14 && tP < 104) result += ((tP - 4) % 10) + " ";
+							else if (i == 14 && tP > 14 && tP < 104) result += ((int) (Math.floor((tP - 4) / 10))) + " ";
+							else if (tP > 0) result += "O ";
 							else result += "X ";
 						}
 						else if (j == 0 ) {
